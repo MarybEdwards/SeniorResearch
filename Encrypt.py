@@ -2,34 +2,41 @@ import random
 from random import randint
 import os
 def int_to_file(filename, integers, n):
-  i=0
-  f = open(filename, 'w')
-  f = ope(filename, 'a+b')
-  g = n.to_bytes(7, byteorder = "big")
-  while i < len(integers):
-    byted = integers[i].to_bytes(10,byteorder = "big")
-    f.write (byted)
-    f.write(g)
-    f.read()
-    i = i+1
+	#writes over the file you're sending with the modified bytes and between each byte it has a default number both people have; n
+	i=0
+	f = open(filename, 'w')
+	f = open(filename, 'a+b')
+	g = n.to_bytes(7, byteorder = "big")
+	# g = known number in between each byte so that you can easily make a list for decrypting
+	while i < len(integers):
+		byted = integers[i].to_bytes(10,byteorder = "big")
+		#changes each integer into a byte
+		f.write (byted)
+		f.write(g)
+		#writes the bytes of the file
+		f.read()
+		i = i+1
+		#goes through each character of the file
 def int_to_file_decrypt (filename, integers, path):
-  os.chdir(path)
-  f = open(filename, 'w+')
-  f = open(filename, 'a+b')
-  i = 0
-  while i < len(integers):
-    byted= integers [i].to_bytes(10, byteorder = "big")
-    f = open(filename, 'a+b')
-    f.write (byted)
-    i = i+1
+	os.chdir(path)
+	#opens the directory that holds the file needed
+	f = open(filename, 'w+')
+	f = open(filename, 'a+b')
+	i = 0
+	while i < len(integers):
+		byted= integers [i].to_bytes(10, byteorder = "big")
+		f = open(filename, 'a+b')
+		#writes over the file with the decrypted characters
+		f.write (byted)
+		i = i+1
 def file_to_array (f, n):
-  testing = n.to_bytes(7, byteorder = "big")
-  bytelist = f.split(testing, maxsplit = -1)
-  i = 0 
-  while i<len(bytelist):
-    p = int.from_bytelist[i], byteorder = "big")
-    bytelist[i] = p
-    i = i+1
+	testing = n.to_bytes(7, byteorder = "big")
+	bytelist = f.split(testing, maxsplit = -1)
+	i = 0 
+	while i<len(bytelist):
+		p = int.from_bytelist[i], byteorder = "big")
+		bytelist[i] = p
+		i = i+1
 	del bytelist[len(bytelist)-1]
 	return bytelist
 def file_to_int(h):
