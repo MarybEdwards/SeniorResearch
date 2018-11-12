@@ -1,0 +1,20 @@
+import Encrypt
+from Encrypt import int_to_file
+from Encrypt import file_to_char
+from Encrypt import file_to_array
+from Encrypt import int_to_file_decrypt
+from Encrypt import mod_math
+def encrypt(filename, f):
+  listnum = file_to_char(f)
+  i = 0 
+  while i < len(listnum):
+    listnum[i] = mod_math(list[i], e, n)
+    i = i+1
+  int_to_file(filename, listnum, n)
+def decrypt (f, filename, path):
+  numlist = file_to_array(f, n)
+  i = 0
+  while i < len(numlist):
+    numlist[i] = mod_math(numlist[i], e, n)
+    i = i+1
+  int_to_file_decrypt(filename, numlist, path)
