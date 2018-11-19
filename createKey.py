@@ -14,7 +14,7 @@ n, e, d = gen_key()
 ip_ad1 = ip_ad.replace (".", "!")
 your_ip_ad1 = your_ip_ad.replace(".", "!")
 #done because the .'s would mess with the format of the file saved
-n = str(d)
+n = str(n)
 d = str(d)
 e = str(e)
 #done so they can be written into the public key and private key files when they are saved as .py files
@@ -33,14 +33,13 @@ f1.write("n= " + n + "\ne= " + d + " \n" + skely)
 f2 = open(filename2, 'w+')
 f2.write("n= " + n + " \ne= " + e + "\n" +skely)
 #adds the n value and e value into the key program
-storing = "STOR " filename2
 #can probably get rid of above and fixed as below
 ftp = FTP(ip_ad)
-f2 = open(filename2, 'fr')
+f2 = open(filename2, 'rb')
 ftp.login(input('input your username '), getpass.getpass('input your password '))
 #I set up the FTP to be based on the other computer but have a login for a user from the original computer... so this may not work on everyone's set up...
 ftp.cwd('Encrypt')
 #ftp.storbinary('STOR ' + filename2, f2)`
-ftp.storbinary(storing, f2)
+ftp.storbinary('STOR' + filename, f2)
 os.remove(filename2)
 #removes the encrypted file once it had been sent 
