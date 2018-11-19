@@ -7,9 +7,14 @@ def int_to_file(filename, integers, n):
 	f = open(filename, 'w')
 	f = open(filename, 'a+b')
 	g = n.to_bytes(7, byteorder = "big")
+	#g = n.to_bytes((n.bit_length()//8)+1, byteorder = "big")
 	# g = known number in between each byte so that you can easily make a list for decrypting
 	while i < len(integers):
+	#do a for loop 
+	#for num in integers:
 		byted = integers[i].to_bytes(10,byteorder = "big")
+		#byted = integers[num].to_bytes((integers[num].bit_length()//8)+1, byteorder = "big")
+		#instead of above or everything put f.write(integers[num].to_bytes((integers[num].bit_length()//8)+1, byteorder = "big")
 		#changes each integer into a byte
 		f.write (byted)
 		f.write(g)
@@ -24,10 +29,12 @@ def int_to_file_decrypt (filename, integers, path):
 	f = open(filename, 'a+b')
 	i = 0
 	while i < len(integers):
+	#for num in integers:
 		byted= integers [i].to_bytes(10, byteorder = "big")
 		f = open(filename, 'a+b')
 		#writes over the file with the decrypted characters
 		f.write (byted)
+		#try f.write(integers[num].to_bytes((integer.bit_length()//8)+1, byteorder = "big")
 		i = i+1
 def file_to_array (f, n):
 	#this changes the file to an array of integers (each integer represents a character)
