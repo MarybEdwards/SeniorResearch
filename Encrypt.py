@@ -34,9 +34,8 @@ def file_to_array (f, n):
 def file_to_char(h):
 	#the file is called h (I will change it to a better name)
 	characters = list()
-	while i < len(h):
+	for parts in range(len(h)):
 		characters.append(int.from_bytes((h[parts].encode())), byteorder = "big")
-		i +=1
 		#runs for the until the entire file has been put into the array
 		#puts each character in the file into the array
 		#converts each part of the file into utf-8 integers
@@ -116,12 +115,10 @@ def mod_math (mess, exp, moded):
 		#this is a method used so that the numbers aren't too big for the computer to do math with but remain accurate 
 		if bitlist[i] != 0:
 			temp = mess
-			counter = 0
-			while counter <i:
+			for counter in range(i):
 				temp = (temp**2)%moded
 				#takes it to the power of two before being moded and repeats because that is the same as
 				#the temp to the power of 2^i and being moded for each of the bits that make up the exponent needed
-				counter +=1
 			bitlist[i] = temp
 			#probable can just put newMess = newMess*temp%moded
 			newMess = newMess*bitlist[i]%moded
