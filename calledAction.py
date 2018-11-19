@@ -26,13 +26,10 @@ if what == "e":
   os.chdir(current)
   module(filename, f)
   #runs the encryption with the file
-  storing = "STOR" + filename
-  #can probably get rid of the above
   ftp = FTP(ip_ad)
   f = open(filename, 'rb')
   ftp.login(input('input your username '), getpass.getpass('input your password '))
-  #probably can put below as ftp.storebinary('STOR' + filename, f)
-  ftp.storebinary(storing, f)
+  ftp.storebinary('STOR' + filename, f)
   os.remove(filename)
   #removes the new file that was just created on the computer as it was saved to the ftp file in the other computer
 if what == "d":
