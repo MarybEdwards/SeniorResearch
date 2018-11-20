@@ -30,11 +30,11 @@ def file_to_array (filename, known):
 	#the number used to separate the character is turned into bytes so that the computer can compare
 	bytelist = filename.split(known.to_bytes((known.bit_length()//8)+1), maxsplit = -1)
 	#divides the list into an array in which each part is a byte for a different character, using the bytes for the testing
-	intlist = [int.from_bytes(bytelist[i], byteorder = "big") for i in bytelist]
+	intlist = [int.from_bytes(byteNum, byteorder = "big") for byteNum in bytelist]
 	del inlist[len(intlist)-1]
 	return intlist
 def file_to_char(filename):
-	characters = [(int.from_bytes((filename[parts].encode()))), byteorder ="big")) for parts in range(len(filename)))
+	characters = [(int.from_bytes(parts.encode(),byteorder = "big")) for parts in filename]
 		#puts each character in the file into the array
 		#converts each part of the file into utf-8 integers
 		#converts each integer into bytes
@@ -77,17 +77,17 @@ def gen_key():
 	up = 10000000
 	down = 100000
 	#defines the upper boundary and lowerboundary for the generation of large prime numbers
-	p = gen_prime(down, up)
-	q = gen_prime(down, up)
+	primeNum1 = gen_prime(down, up)
+	primeNum2 = gen_prime(down, up)
 	#two large prime numbers that are different from each other, but I need to add the comparison to each other
-	m, n= gen_m_n (p, q)
+	m, n= gen_m_n (primeNum1, primeNum2)
 	e = gen_e(m)
 	d = gen_d (m, e)
 	#n is the value shared between both private and public keys, but d is for the private key and e is for the public key
 	return n, e, d
-def gen_m_n(p, q):
-	m = (p-1)*(q-1)
-	n = p*q
+def gen_m_n(num1, num2):
+	m = (num1-1)*(num2-1)
+	n = num1*num2
 	return m, n
 def gen_prime (down, up):
 	prime = random.randint(down, up)
