@@ -15,6 +15,7 @@ def int_to_file(filename, integers, known):
 		#changes each integer into a byte
 		#writes the bytes of the file
 		#goes through each character of the file
+	FILE.close()
 def int_to_file_decrypt (filename, integers, path):
 	os.chdir(path)
 	#opens the directory that holds the file needed
@@ -25,6 +26,7 @@ def int_to_file_decrypt (filename, integers, path):
 		FILE = open(filename, 'a+b')
 		FILE.write(looping.to_bytes((looping.bit_length()//8)+1, byteorder = "big"))
 		#writes over the file with the decrypted characters
+	FILE.close()
 def file_to_array (filename, known):
 	#this changes the file to an array of integers (each integer represents a character)
 	#the number used to separate the character is turned into bytes so that the computer can compare
