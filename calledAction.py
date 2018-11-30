@@ -11,7 +11,7 @@ if what == "e":
   #calls for encrypting a file
   filename = input('What file would you like to encrypt? ')
   #requires the person to start in the directory in which the file is stored to get the path for the filename
-  in_ad = input ('Where would you like to send this file? \nPlease input an IP address ')
+  ip_ad = input ('Where would you like to send this file? \nPlease input an IP address ')
   ip_ad1 = ip_ad.replace(".", "!")
   path = input('What was the path provided? ')
   #the path provided was the shown due to the alias created in the system for people who are inept at dealing with computers
@@ -29,7 +29,7 @@ if what == "e":
   ftp = FTP(ip_ad)
   f = open(filename, 'rb')
   ftp.login(input('input your username '), getpass.getpass('input your password '))
-  ftp.storebinary('STOR' + filename, f)
+  ftp.storbinary('STOR ' + filename, f)
   os.remove(filename)
   #removes the new file that was just created on the computer as it was saved to the ftp file in the other computer
 if what == "d":
@@ -48,4 +48,3 @@ if what == "d":
 if what =='s':
   module = __import__('createKey')
   module
-  
