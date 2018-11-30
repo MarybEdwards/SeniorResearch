@@ -25,13 +25,13 @@ filename1 = "privateKey" + ip_ad1 + ".py"
 filename2 = "publicKey" + your_ip_ad1 + ".py"
 #creates a file and includes which public/private key belongs to which pairing
 f1 = open(filename1, 'w+')
-f1.write("n= " + n + "\ne= " + d + " \n" + skely)
+f1.write("n= " + n + "\ne= " + d + "\n" + skely)
 #adds the n value and d value into the key program
 #the variable d is used despite it being labled e because they are used the same way in public and private keys making it easier
 #to just have it be labled the same thing even with different numbers
 #if someone has the d value, they can get the e value, so this has to stay private and not be sent
 f2 = open(filename2, 'w+')
-f2.write("n= " + n + " \ne= " + e + "\n" +skely)
+f2.write("n= " + n + "\ne= " + e + "\n" +skely)
 #adds the n value and e value into the key program
 #can probably get rid of above and fixed as below
 ftp = FTP(ip_ad)
@@ -40,6 +40,6 @@ ftp.login(input('input your username '), getpass.getpass('input your password ')
 #I set up the FTP to be based on the other computer but have a login for a user from the original computer... so this may not work on everyone's set up...
 ftp.cwd('Encrypt')
 #ftp.storbinary('STOR ' + filename2, f2)`
-ftp.storbinary('STOR' + filename, f2)
+ftp.storbinary('STOR ' + filename2, f2)
 os.remove(filename2)
-#removes the encrypted file once it had been sent 
+#removes the encrypted file once i
