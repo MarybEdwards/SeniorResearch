@@ -26,6 +26,7 @@ filename2 = "publicKey" + your_ip_ad1 + ".py"
 #creates a file and includes which public/private key belongs to which pairing
 f1 = open(filename1, 'w+')
 f1.write("n= " + n + "\ne= " + d + "\n" + skely)
+f1.close()
 #adds the n value and d value into the key program
 #the variable d is used despite it being labled e because they are used the same way in public and private keys making it easier
 #to just have it be labled the same thing even with different numbers
@@ -39,7 +40,8 @@ f2 = open(filename2, 'rb')
 ftp.login(input('input your username '), getpass.getpass('input your password '))
 #I set up the FTP to be based on the other computer but have a login for a user from the original computer... so this may not work on everyone's set up...
 ftp.cwd('Encrypt')
-#ftp.storbinary('STOR ' + filename2, f2)`
 ftp.storbinary('STOR ' + filename2, f2)
+f2.close()
 os.remove(filename2)
+skely.close()
 #removes the encrypted file once i
