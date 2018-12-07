@@ -10,20 +10,20 @@ Then set up ftp on both computers by:
 	sudo apt-get install ftp
   in 
 	
-		sudo nano /etc/vsftpd.conf 
+	sudo nano /etc/vsftpd.conf 
   change 
 	
-      listen = YES
+	listen = YES
    to 
 	 
-      listen = NO
+	listen = NO
 			
-  in 
+  In the file:
 	
-		sudo nano /etc/xinetd.d/vsftpd
-   write in 
-	 
-      service ftp
+	sudo nano /etc/xinetd.d/vsftpd
+  write:
+   
+   	service ftp
         {
           disable                 = no
           socket_type             = stream
@@ -36,22 +36,24 @@ Then set up ftp on both computers by:
           log_on_success          += PID HOST DURATION
           log_on_failure          += HOST
         }
-				
+exit to command line then type:	
 				
   	sudo service vsftpd stop
   	sudo service vsftpd start
   	sudo add userNameOfOtherComputer
-  in 
+  in the file :
 	
-		sudo nano /etc/passwd
-    jfkdlsa
-  
-	
-		sudo passwd userNameOfOtherComputer
-  		passWordOfOtherComputer
-  in 
+	sudo nano /etc/passwd
+write/change:
+
+	jfkdlsa
+ Exit to command line, then type 
+ 
+	sudo passwd userNameOfOtherComputer
+  	passWordOfOtherComputer
+  in the file:
 		
-		sudo nano ~/.bashrc
+	sudo nano ~/.bashrc
    write in 
    
-	 	alais encrypt = 'echo "your path is " ; pwd; cd / home/pathToEncryptionFile ; p$n2 calledAction.py; cd -'
+	 alais encrypt = 'echo "your path is " ; pwd; cd / home/pathToEncryptionFile ; p$n2 calledAction.py; cd -'
