@@ -8,20 +8,20 @@ Then set up ftp on both computers by:
 	sudo apt-get install vsftpd
  	sudo apt-get install xinetd
 	sudo apt-get install ftp
-  in 
+in 
 	
 	sudo nano /etc/vsftpd.conf 
-  change 
+change 
 	
 	listen = YES
-   to 
+to 
 	 
 	listen = NO
 			
-  In the file:
+In the file:
 	
 	sudo nano /etc/xinetd.d/vsftpd
-  write:
+write:
    
    	service ftp
         {
@@ -41,19 +41,28 @@ exit to command line then type:
   	sudo service vsftpd stop
   	sudo service vsftpd start
   	sudo add userNameOfOtherComputer
-  in the file :
+in the file :
 	
 	sudo nano /etc/passwd
 write/change:
 
 	jfkdlsa
- Exit to command line, then type 
+Exit to command line, then type 
  
 	sudo passwd userNameOfOtherComputer
   	passWordOfOtherComputer
-  in the file:
+in the file:
 		
 	sudo nano ~/.bashrc
-   write in 
+write in 
    
 	 alais encrypt = 'echo "your path is " ; pwd; cd / home/pathToEncryptionFile ; p$n2 calledAction.py; cd -'
+Test to double check the ftp connection by typing:
+	
+	ftp ipAddressOfOtherComputer
+	ThisCOmputer'sUsername
+	ThisComputer'sPassword
+It does not come up with an error then the connection is good and everything is set up and you are ready to test it!
+Before sending an encrypted file you need to send a key so send a key from each computer by typing in encrypt and following the directions
+Then you can send a file by going to the directory where the file is stored and typing encrypt and following the directions
+To decrypt a file just go to the directory in which it was saved and type encrypt and follow the directions.
