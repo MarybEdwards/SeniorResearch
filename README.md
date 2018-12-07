@@ -14,10 +14,15 @@ in
 change 
 	
 	listen = YES
+	#local_enable=YES
+	anonymous_enable=YES
+	#write_enable=YES
 to 
 	 
 	listen = NO
-			
+	local_enable=YES
+	anonymous_enable=NO
+	write_enable=YES	
 In the file:
 	
 	sudo nano /etc/xinetd.d/vsftpd
@@ -44,13 +49,15 @@ exit to command line then type:
 in the file :
 	
 	sudo nano /etc/passwd
-write/change:
+Edit the line starting with the userNameOfOtherComputer to have parts matching line for the user on this computer so it resembles the following
 
-	jfkdlsa
+	MyUserName:x:1000:1000:MyUserName,,,:/home/MyUserName:/bin/bash
+	OtherUserName:x:1000:1001:OtherUserName,,,:/home/MyUserName:/bin/bash
 Exit to command line, then type 
  
 	sudo passwd userNameOfOtherComputer
   	passWordOfOtherComputer
+	
 in the file:
 		
 	sudo nano ~/.bashrc
@@ -63,6 +70,12 @@ Test to double check the ftp connection by typing:
 	ThisCOmputer'sUsername
 	ThisComputer'sPassword
 It does not come up with an error then the connection is good and everything is set up and you are ready to test it!
+If you have a specific directory you want all the files to be sent to do this:
+
+	ftp ipAddressOfThisComputer
+	ThisComputer'sUsername
+	ThisComputer'sPassword
+	lcd DirectorName
 Before sending an encrypted file you need to send a key so send a key from each computer by typing in encrypt and following the directions
 Then you can send a file by going to the directory where the file is stored and typing encrypt and following the directions
 To decrypt a file just go to the directory in which it was saved and type encrypt and follow the directions.
