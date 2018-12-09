@@ -1,6 +1,8 @@
 # SeniorResearch
 My senior research project based on public key encryption written in python 3 in a linux os
 
+works with encrypting txt files
+
 This requires the import of 
 
 	random
