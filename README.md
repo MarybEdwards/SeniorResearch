@@ -1,6 +1,14 @@
 # SeniorResearch
 My senior research project based on public key encryption written in python 3 in a linux os
 
+This requires the import of 
+
+	random
+	ftplib
+	subprocess
+	sys
+	os
+	getpass
 First download all the encryption files and save them to one directory on each computer
 
 Then set up ftp on both computers by:
