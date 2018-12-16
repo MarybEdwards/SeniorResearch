@@ -1,3 +1,4 @@
+#I would make this into a parameter since that would probably easier for the computer to do..... but i have no idea how to....
 import Encrypt
 from Encrypt import int_to_file
 from Encrypt import file_to_char
