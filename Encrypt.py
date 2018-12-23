@@ -2,70 +2,51 @@ import random
 from random import randint
 import os
 def int_to_file(filename, integers, known):
-	#writes over the file you're sending with the modified bytes and between each byte it has a default number both people have; n
-	#filename is the file that is being written over
-	#integers is the list of numbers that has been modified to encode the file 
-	#known is the number n which has been shared between both people and is used like a comma to seperate each byte for easier decoding later
 	FILE = open(filename, 'w')
-	FILE = open(filename, 'a+b')
-	# opens the file so that it can be written and added onto in bytes
-	knownByte = known.to_bytes((known.bit_length()//8)+1, byteorder = "big")
-	#knownByte = known number in between each byte so that you can easily make a list for decrypting
 	for looping in integers:
-	#goes through each number in the list of "integers"
-		FILE.write(looping.to_bytes((looping.bit_length()//8)+1, byteorder = "big"))
-		#adds the byte form of each integer to the file 
-		FILE.write(knownByte)
-		#adds in the byte form of the known number as a default comma
+		writing(filename, looping)
+		writing(filename, known)
 	FILE.close()
+	
+def become_bytes(character):
+	length= (character.bytelength()//8)+1)
+	theBytes = character.to_bytes(length, byteorder = "big")
+	return theBytes
+		
+			
+def writing (filename, part):
+	writingFile= open(filename, 'a+b')
+	partBytes= part.to_bytes(length_and_size(part))
+	writingFile.write(partByte)
+	
+
 def int_to_file_decrypt (filename, integers, path):
-	#filename is the file that is being decrypted
-	#integers is the list of numbers that has been modified to the correct integer interpretation of the characters
-	#path is the way to get to the file so that it can be directly written over
 	os.chdir(path)
-	#opens the directory that holds the file needed
 	FILE = open(filename, 'w+')
-	#writes over everything that already existed in the file, which is no longer needed because that information was transferred to integers
-	FILE = open(filename, 'a+b')
-	#opens the file so that it can be added to in bytes
 	for looping in integers:
-	#for num in integers:
-		FILE = open(filename, 'a+b')
-		FILE.write(looping.to_bytes((looping.bit_length()//8)+1, byteorder = "big"))
-		#writes over the file with the decrypted characters in byte form
+		writing(filename, looping)
 	FILE.close()
+	
+	
 def file_to_array (filename, known):
-	#This turns the file into an array of integers, each of which represents a character for decryption
-	#filename is the file being decrypted
-	#known is the number that was used as a comma when encrypting the file, it is a number both keys share
-	bytelist = filename.split(known.to_bytes((known.bit_length()//8)+1, byteorder = "big"), maxsplit = -1)
-	#Splits the file into an array of bytes and it knows where to split by using the known as a reference point
+	bytelist = filename.split(become_bytes(known), maxsplit = -1)
 	intlist = [int.from_bytes(byteNum, byteorder = "big") for byteNum in bytelist]
-	#converts the array from bytes to integers
 	del intlist[len(intlist)-1]
-	#there is an extra blank spot at the end of the list that can come up with an error if left in the list, so it is removed
 	return intlist
+
+
+
 def file_to_char(filename):
 	characters = [(int.from_bytes(filename[count].encode(),byteorder = "big")) for count in range(len(filename))]
-		#puts each character in the file into the array
-		#converts each part of the file into utf-8 integers
-		#converts each integer into bytes
 	return characters
+
 def gen_d (m, e):
-	#generates the d value for the equation by finding e^-1modm
 	hi = m
-	#the larger number is the m value and that is the number being moded by e
 	low = e
-	#e is the smaller number m is being moded by
 	r = hi%low
-	#r for remainder of the hi/low, which is equal to hi moded by low
 	x = (hi-r)/low
-	#gives the result of the division as an integer without the remainder
-	#equation used is: r=m-x*a
 	aMult = 0-x
 	mMult = 1
-	#r=mMult*hi*M+aMult*low*A
-	#^^where M and A are variables
 	oriA = 1
 	oriM = 0
 	hi = low
@@ -77,9 +58,6 @@ def gen_d (m, e):
 		tempA = aMult
 		mMult = oriM - (x*mMult)
 		aMult = oriA - (x*aMult)
-		#r= hiM-xlowA
-		#r = hi-(previousR*x) which ends up being r=(previousMcoefficient-(x*currentMcoefficient))m+(previousAcoefficient-(x*currentAcoefficient))a
-		#this is because you sub in the previous equation
 		oriA = tempA
 		oriM = tempM
 		hi = low
@@ -87,8 +65,9 @@ def gen_d (m, e):
 	d = aMult
 	if aMult <0:
 		d = m+aMult
-		#ensures that this value is positive 
 	return d
+
+
 def gen_e (m):
 	check = 2 
 	e = 1003242
