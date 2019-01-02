@@ -1,13 +1,19 @@
 import subprocess
 from subprocess import call
-import ftplib
-from ftplib import FTP
 import sys
 from sys import modules
 import os
 import getpass
-what = input('What would you like to do? \nEncrypt a file (e), decrypt a file(d), or send a public key (s)? ')
-if what == "e":
+import Math
+from Math import gen_key
+import FTPStuff
+from FTPStuff import ftp_login
+from FTPStuff import ftp_placing
+from FTPStuff import get_other_ip_ad
+
+
+task = input('What would you like to do? \nEncrypt a file (e), decrypt a file(d), or send a public key (k)? ')
+if task == "e":
 	filename = input('What file would you like to encrypt? ')
 	ip_ad = input ('Where would you like to send this file? \nPlease input an IP address ')
 	ip_ad1 = ip_ad.replace(".", "!")
@@ -23,7 +29,7 @@ if what == "e":
 	ftp.login(input('input your username '), getpass.getpass('input your password '))
 	ftp.storbinary('STOR ' + filename, f)
 	os.remove(filename)
-if what == "d":
+if task == "d":
 	filename = input('What file would you like to decrypt? ')
 	ip_ad = input ('Who sent this file? \nPlease input an IP address')
 	path = input ('What was the path provided? ')
@@ -35,6 +41,14 @@ if what == "d":
 	f = open(filename, 'rb').read()
 	os.chdir(current)
 	module(f,filename,path)
-if what =='s':
-	module = __import__('createKey')
-	module
+if task =='k':
+	ipAd= get_other_ip_ad()
+	yourIpAd = input ('What is your ip address? ')
+	n, e, d = gen_key()
+	filename1 = "privateKey" + change_ip_address(ipAd) + ".py"
+	filename2 = "publicKey" + change_ip_address(yourIpA\d) + ".py"
+	write_to_skely(n, d, filename1)
+	write_to_skely(n, e, filename2)
+	ftp= ftp_login(ip_ad)
+	ftp_placing(ftp, filename2)
+	os.remove(filename2)
