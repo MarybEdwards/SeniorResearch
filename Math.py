@@ -1,26 +1,33 @@
+one = 1
+two = 2
+zero = 0
+half = 0.5
+three= 3
+
 def gen_inverse (modulus, integer):
 	#generates the modular multiplicative inverse of the integer
 	remainder = modulus%integer
-	coefficient = (modulus-remainder)/integer
-	aMult = 0-coefficient
-	oriA = 1
+	#works off the peicewise equation where:
+		#inverse = inverse(n-2)-(inverse-1)
+	multiplier = (modulus-remainder)/integer
+	inverse = zero-coefficient
+	oriCoefficient = one
 	hi = integer
 	low = remainder
-	while low!= 1:
+	while low!= one:
 		remainder = hi%low
-		coefficient= (hi-remainder)/low
-		tempA = aMult
-		aMult = oriA - (coefficient*aMult)
-		oriA = tempA
+		multiplier= (hi-remainder)/low
+		tempA = inverse
+		inverse = oriCoefficient - (coefficient*inverse)
+		oriCoefficient = tempA
 		hi = low
 		low = remainder
-	inverse = aMult
-	if aMult <0:
-		inverse = modulus+aMult
+	if inverse < zero:
+		inverse = modulus+inverse
 	return inverse
 
 def add_one(number):
-	number+=1
+	number+=one
 	return number
 	
 
@@ -31,47 +38,53 @@ def gen_key():
 	while sameInteger == true:
 		primeNum1 = gen_prime(lowerBound, upperBound)
 		primeNum2 = gen_prime(lowerBound, upperBound)
-		if primeNum1!=primeNum2:
-			sameInteger = false
-	modulus, sharedValue= gen_m_n (primeNum1, primeNum2)
-	publicValue = gen_prime(10000, modulus)
+		sameInteger = same_number(primeNum1, primeNum2)
+	modulus, sharedValue= gen_totient_product (primeNum1, primeNum2)
+	publicValue = gen_prime(10000, modulus-1)
 	privateValue = gen_inverse (modulus, publicValue)
 	return str(sharedValue), str(publicValue), str(privateValue)
 
 
-def gen_m_n(num1, num2):
-	m = (num1-1)*(num2-1)
-	n = num1*num2
-	return m, n
+def same_number(num1, num2):
+	if num1==num2:
+		return true
+	else:
+		return false
+
+
+def gen_totient_product(num1, num2):
+	totient = (num1-one)*(num2-one)
+	product = num1*num2
+	return totient, product
 
 
 def gen_prime (lowerbound, upperbound):
 	primeNumber = random.randint(lowerbound, upperbound)
-	check = 2
-	while primeNumber<upperbound:
- 		while check < (primeNumber**(0.5)):	
- 			if primeNumber%check ==0 and primeNumber!=upperbound:	
- 				add_one(primeNumber)	
- 				check = 2	
- 			else:	
- 				add_one(check)
+	check = three
+ 	while check < (primeNumber**(half)):	
+ 		if primeNumber%check ==zero or primeNumber%two==zero:	
+ 			add_one(primeNumber)	
+ 			check = three
+		else:	
+ 			add_one(check)
+			add_one(check)
 	return primeNumber
 
 def byted_format (number):
 	onesAndZeros = list()
-	while (number!=0):
-		onesAndZeros.append(number%2)
-		number = (number-(number%2))//2
-	numBaseTwo = [(onesAndZeros[index]*2)**index for index in range(len(onesAndZeros))]
+	while (number!=zero):
+		onesAndZeros.append(number%two)
+		number = (number-(number%two))//two
+	numBaseTwo = [(onesAndZeros[index]*two)**index for index in range(len(onesAndZeros))]
 	return numBaseTwo
 
 def change_message (message, exponent, modulus):
 	bitlist = byted_format (exponent)
-	newMessage = 1
+	newMessage = one
 	for looping in range(len(bitlist)):
-		if bitlist[looping] != 0:
+		if bitlist[looping] != zero:
                     temp = message
                     for counter in range(looping):
-                        temp=(temp**2)%modulus
+                        temp=(temp**two)%modulus
                     newMessage=newMessage*temp%modulus
 	return newMessage
