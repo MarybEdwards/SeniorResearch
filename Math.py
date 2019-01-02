@@ -40,7 +40,7 @@ def gen_key():
 		primeNum2 = gen_prime(lowerBound, upperBound)
 		sameInteger = same_number(primeNum1, primeNum2)
 	modulus, sharedValue= gen_totient_product (primeNum1, primeNum2)
-	publicValue = gen_prime(10000, modulus-1)
+	publicValue = gen_prime(10000, modulus-one)
 	privateValue = gen_inverse (modulus, publicValue)
 	return str(sharedValue), str(publicValue), str(privateValue)
 
