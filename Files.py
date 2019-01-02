@@ -1,8 +1,12 @@
 import random
 from random import randint
 import os
+readMode = "'r'"
+writeMode = "'w'"
+writeAddMode = "'w+'"
+appendByteMode = "'a+b'"
 def int_to_file(filename, integers, known):
-	opening = open(filename, 'w')
+	opening = open(filename, writeMode)
 	for looping in integers:
 		writing(filename, looping)
 		writing(filename, known)
@@ -15,14 +19,14 @@ def become_bytes(character):
 		
 			
 def writing (filename, part):
-	writingFile= open(filename, 'a+b')
+	writingFile= open(filename, appendByteMode)
 	partBytes= part.to_bytes(length_and_size(part))
 	writingFile.write(partByte)
 	
 
 def int_to_file_decrypt (filename, integers, path):
 	os.chdir(path)
-	opening = open(filename, 'w+')
+	opening = open(filename, writeMode)
 	for looping in integers:
 		writing(filename, looping)
 	opening.close()
@@ -43,3 +47,15 @@ def file_to_array (filename, known):
 def file_to_char(filename):
 	characters [integer_from_bytes(filename[count].encode) for count in range(len(filename))]
 	return characters
+
+def write_to_skely (number1, number2, filename):
+	skely = open('skeleton.txt', readMode).read()
+	fileRead = open(filename, writeAddMode)
+	fileRead.write("n= " + number1 + "\ne= " + number2 + "\n" +skely)
+	fileRead.close()
+	skely.close()
+				   
+def change_ip_address (ipAdress):
+	newAddress = ipAdress.replace(".", "!")
+	return newAdress
+				     
