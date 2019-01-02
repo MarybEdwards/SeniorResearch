@@ -1,6 +1,7 @@
 def gen_inverse (modulus, integer):
-	remainder = modulus%e
-	coefficient = (modulus-r)/integer
+	#generates the modular multiplicative inverse of the integer
+	remainder = modulus%integer
+	coefficient = (modulus-remainder)/integer
 	aMult = 0-coefficient
 	oriA = 1
 	hi = integer
@@ -35,7 +36,7 @@ def gen_key():
 	modulus, sharedValue= gen_m_n (primeNum1, primeNum2)
 	publicValue = gen_prime(10000, modulus)
 	privateValue = gen_inverse (modulus, publicValue)
-	return sharedValue, publicValue, privateValue
+	return str(sharedValue), str(publicValue), str(privateValue)
 
 
 def gen_m_n(num1, num2):
