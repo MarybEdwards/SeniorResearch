@@ -8,7 +8,9 @@ def gen_inverse (modulus, integer):
 	#generates the modular multiplicative inverse of the integer
 	remainder = modulus%integer
 	#works off the peicewise equation where:
-		#inverse = inverse(n-2)-(inverse-1)
+		#remainder = multiplier(hi)-low
+		#inverse(n) = inverse(n-2)-(inverse(n-1)*multiplier(n)) for n<1
+		#inverse(1) = 1        inverse(0)=0
 	multiplier = (modulus-remainder)/integer
 	inverse = zero-coefficient
 	oriCoefficient = one
@@ -27,6 +29,7 @@ def gen_inverse (modulus, integer):
 	return inverse
 
 def add_one(number):
+	#increases the number by an increment of one 
 	number+=one
 	return number
 	
@@ -46,6 +49,7 @@ def gen_key():
 
 
 def same_number(num1, num2):
+	#returns true if the numbers passed in are the same number
 	if num1==num2:
 		return true
 	else:
