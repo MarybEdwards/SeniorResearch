@@ -6,24 +6,24 @@ three= 3
 
 def gen_inverse (modulus, integer):
 	#generates the modular multiplicative inverse of the integer
-	remainder = modulus%integer
+	remainder = modulus
 	#works off the peicewise equation where:
 		#remainder = multiplier(hi)-low
 		#inverse(n) = inverse(n-2)-(inverse(n-1)*multiplier(n)) for n<1
 		#inverse(1) = 1        inverse(0)=0
-	multiplier = (modulus-remainder)/integer
-	inverse = zero-coefficient
-	oriCoefficient = one
-	hi = integer
-	low = remainder
+	previous = one
+	beforePrevious = zero
+	hi = modulus
+	low = integer 
 	while low!= one:
 		remainder = hi%low
-		multiplier= (hi-remainder)/low
-		tempA = inverse
-		inverse = oriCoefficient - (coefficient*inverse)
-		oriCoefficient = tempA
+		multiplier = (hi-remainder)/low
+		inverse = beforePrevious-(multiplier*previous)
+		beforePrevious= previous
+		previous = inverse
 		hi = low
 		low = remainder
+		
 	if inverse < zero:
 		inverse = modulus+inverse
 	return inverse
