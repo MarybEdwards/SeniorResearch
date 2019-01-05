@@ -4,6 +4,7 @@ zero = 0
 half = 0.5
 three= 3
 
+
 def gen_inverse (modulus, integer):
 	#generates the modular multiplicative inverse of the integer
 	remainder = modulus
@@ -29,6 +30,7 @@ def gen_inverse (modulus, integer):
 	if inverse < zero:
 		inverse = modulus+inverse
 	return inverse
+
 
 def add(number, increment):
 	#increases the number by some increment 
@@ -89,6 +91,7 @@ def gen_prime (lowerbound, upperbound):
 			#finds next number to check that is not even (all even numbers are already divisible by two)
 	return primeNumber
 
+
 def byted_format (number):
 	#changes the number into bytes and then into their corresponding powers of two
 	onesAndZeros = list()
@@ -99,6 +102,7 @@ def byted_format (number):
 	numBaseTwo = [(onesAndZeros[index]*two)**index for index in range(len(onesAndZeros))]
 	#raises each number to it's appropriate power of two in the list
 	return numBaseTwo
+
 
 def change_message (message, exponent, modulus):
 	bitlist = byted_format (exponent)
