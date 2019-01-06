@@ -11,7 +11,6 @@ def ftp_login (ipAdress):
         return connection
 
 def ftp_placing (connection, filename, fileRead):
-	fileRead = open(filename, readBinaryMode)
 	if filename.find("publickey")>=(0):
 		 ftp.cwd('Encrypt')	
         connection.storbinary('STOR '+filename, fileRead)
