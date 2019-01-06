@@ -1,3 +1,5 @@
+n= 52460258402287
+e= 1003243
 import Encrypt
 from Encrypt import int_to_file
 from Encrypt import file_to_char
