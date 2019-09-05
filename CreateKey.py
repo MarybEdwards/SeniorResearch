@@ -17,7 +17,7 @@ n = str(n)
 d = str(d)
 e = str(e)
 filename1 = "privateKey" + change_ip_address(ipAd) + ".py"
-filename2 = "publicKey" + change_ip_address(yourIpA\d) + ".py"
+filename2 = "publicKey" + change_ip_address(yourIpAd) + ".py"
 write_to_skely(n, d, filename1)
 write_to_skely(n, e, filename2)
 ftp= ftp_login(ip_ad)
